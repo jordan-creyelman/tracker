@@ -1,31 +1,38 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-
+using Spectre.Console;
+using System.Globalization;
 class Program
 {
-    static void Main()
+    
+
+static void Main()
+{
+    User user1 = new User();
+    Validation validation = new Validation();
+    int time = user1.Time();
+    user1.Chrono(time);
+    string date = "19920818";
+    Console.WriteLine(validation.IsDateAvailable(date));
+    Console.WriteLine(validation.FormatDate(date));
+    user1.Name = AnsiConsole.Ask<string>("Enter Name: ");
+    user1.Email = AnsiConsole.Ask<string>("Enter Email: ");
+    User.Create(user1);
+
+    int id = AnsiConsole.Ask<int>("Enter the ID of the user you want to read: ");
+    User user = User.Read(id);
+
+    if (user != null)
     {
-        
-      
-         User user1 = new User();
-        Console.Write("Enter Name: ");
-        user1.Name = Console.ReadLine();
-
-        Console.Write("Enter Email: ");
-        user1.Email = Console.ReadLine();
-        User.Create(user1);
-           User user = User.Read(1); // Remplacez 1 par l'ID de l'utilisateur que vous voulez lire
-
-        if (user != null)
-        {
-            Console.WriteLine($"Id: {user.Id}");
-            Console.WriteLine($"Name: {user.Name}");
-            Console.WriteLine($"Email: {user.Email}");
-        }
-        else
-        {
-            Console.WriteLine("User not found");
-        }
-    }        
+        AnsiConsole.MarkupLine($"[bold red]Id:[/] {user.Id}");
+        AnsiConsole.MarkupLine($"[bold red]Name:[/] {user.Name}");
+        AnsiConsole.MarkupLine($"[bold red]Email:[/] {user.Email}");
+    }
+    else
+    {
+        AnsiConsole.MarkupLine("[bold red]User not found[/]");
+    }
+}    
+   
 }

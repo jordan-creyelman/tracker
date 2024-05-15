@@ -53,3 +53,4 @@ C:\Users\creye\Documents\c#\tracker\bin\Debug\net8.0\Microsoft.Extensions.FilePr
 C:\Users\creye\Documents\c#\tracker\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\creye\Documents\c#\tracker\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\creye\Documents\c#\tracker\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\creye\Documents\c#\tracker\obj\Debug\net8.0\tracker.sourcelink.json

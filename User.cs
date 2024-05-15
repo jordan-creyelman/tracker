@@ -1,12 +1,40 @@
 using System;
 using System.Data.SQLite;
-
+using System.Diagnostics;
 public class User
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
+    public int Time(){
+        Console.WriteLine("pour une heure on met 1 ");
+        int  time = Convert.ToInt32(Console.ReadLine());
 
+        return time;
+    }
+        public  void Chrono(int time){
+        Stopwatch stopwatch = new Stopwatch();
+        int  millisecondes = time *60*60*1000;	
+        // Commence le chronomètre
+      // Commence le chronomètre
+        stopwatch.Start();
+
+        // Exécute une tâche qui attend pendant un certain temps
+        Task.Run(() =>
+        {
+            Thread.Sleep(millisecondes);
+        });
+
+        // Affiche le temps écoulé toutes les secondes
+        while (stopwatch.IsRunning)
+        {
+            Console.WriteLine("Temps écoulé: {0}ms", stopwatch.ElapsedMilliseconds);
+            Thread.Sleep(1000);
+        }
+
+        // Arrête le chronomètre
+        stopwatch.Stop();
+    }
     private static SQLiteConnection GetConnection()
 {
     Dictionary<string, string> configurations = Config.ReadConfigFile("config.txt");
@@ -18,6 +46,7 @@ public class User
     var connectionString = $"Data Source={setting1};Version=3;";
     return new SQLiteConnection(connectionString);
 }
+
 
     public static void Create(User user)
 {
