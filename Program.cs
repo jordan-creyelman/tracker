@@ -11,11 +11,10 @@ static void Main()
 {
     User user1 = new User();
     Validation validation = new Validation();
-    int time = user1.Time();
-    user1.Chrono(time);
-    string date = "19920818";
-    Console.WriteLine(validation.IsDateAvailable(date));
-    Console.WriteLine(validation.FormatDate(date));
+    // int time = user1.Time();
+    // user1.Chrono(time);
+    validation.DateOnly();
+   
     user1.Name = AnsiConsole.Ask<string>("Enter Name: ");
     user1.Email = AnsiConsole.Ask<string>("Enter Email: ");
     User.Create(user1);

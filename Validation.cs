@@ -13,22 +13,26 @@ public class Validation
     var connectionString = $"Data Source={setting1};Version=3;";
     return new SQLiteConnection(connectionString);
     }
-    public void FormatDate(string date)
-    {
-        while(true){
-            Console.WriteLine("Enter a date in the format YYYYMMDD: ");
-            date = Console.ReadLine();
-            if (Regex.IsMatch(date, @"^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$"))
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Format est pas correcte, veuillez entrer une date valide.");
-            }
+    public string FormatDate()
+{
+    string date;
+    while(true){
+        Console.WriteLine("Enter a date in the format YYYYMMDD: ");
+         date = Console.ReadLine();
+        if (Regex.IsMatch(date, @"^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$"))
+        {
+            Console.WriteLine("Date valide");
+            break;
         }
-        
+        else
+        {
+            Console.WriteLine("Format est pas correcte, veuillez entrer une date valide.");
+            throw new FormatException("Invalid date format");
+        }
     }
+   return date;
+}
+
     public  bool IsDateAvailable(string dateToCheck)
      
     {   
@@ -46,4 +50,24 @@ public class Validation
             }
         }
     }   
+   public bool DateOnly()
+{
+    while(true)
+    {
+        try
+        {
+           string date =  FormatDate();
+            if (!IsDateAvailable(date))
+            {
+                Console.WriteLine("Date existe pas dans la base de données.");
+                return false;
+            }
+        }
+        catch (FormatException)
+        {
+            continue;
+        }
+        return true;
+    }
+}
 }
